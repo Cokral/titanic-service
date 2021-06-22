@@ -1,0 +1,18 @@
+version: '3.0'
+
+services:
+  titanic_service:
+    build:
+      context: .
+    entrypoint: scripts/run.sh
+    tty: true
+    working_dir: /home/src/titanic_service
+    volumes:
+      - .:/home/src/titanic_service
+    networks:
+      - localbound
+    ports:
+      - "12000:12000"
+networks:
+  localbound:
+    external: true
