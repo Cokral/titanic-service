@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from titanic_service.model.model import TitanicPredict, TitanicParameters
-from titanic_service.model.utils import ModelHandler
+from titanic_service.controller import ModelController
 
 app = FastAPI()
 
@@ -11,14 +11,14 @@ def read_root():
 
 @app.post("/train")
 def train_model(parameters: TitanicParameters):
-    return ModelHandler().train_and_save(dict(parameters))
+    return ModelController().train_model(dict(parameters))
 
 @app.get("/models")
 def fetch_model_list():
-    return ModelHandler().models
+    return ModelController().get_models_metadata()
 
 @app.post("/predict")
 def fetch_predictions(to_predict: TitanicPredict):
     to_predict = dict(to_predict)
     model_id = to_predict.pop('model_id')
-    return ModelHandler().load_and_predict(to_predict, model_id)
+    return ModelController().predict_model(to_predict, model_id)

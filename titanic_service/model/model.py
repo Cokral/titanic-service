@@ -10,7 +10,7 @@ from sklearn.ensemble import (
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.metrics import precision_recall_fscore_support
-from titanic_service.model.processor import Preprocessor
+from titanic_service.model.preprocessor import Preprocessor
 from typing import Dict, Union
 
 
@@ -40,6 +40,10 @@ class TitanicModel:
     TARGET = 'Survived'
     TRAIN_PATH = 'model/input/train_split.csv'
     TEST_PATH = 'model/input/test_split.csv'
+    PREDICTIONS_CLASSES = {
+        0: 'Survived',
+        1: 'Did not survive'
+    }
 
     def __init__(self):
         self.model = None
