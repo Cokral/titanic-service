@@ -5,10 +5,6 @@ from titanic_service.controller import ModelController
 app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
 @app.post("/train")
 def train_model(parameters: TitanicParameters):
     return ModelController().train_model(dict(parameters))
